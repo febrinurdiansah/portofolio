@@ -7,7 +7,7 @@ export function About() {
       icon: Code2,
       title: 'Frontend & Mobile',
       description: 'Crafting pixel-perfect and performant user interfaces on web and mobile.',
-      items: ['React', 'React Native', 'Flutter', 'Tailwind CSS'],
+      items: ['Flutter', 'Laravel', 'React', 'Tailwind CSS'],
     },
     {
       icon: Database, 

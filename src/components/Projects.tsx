@@ -7,6 +7,8 @@ import { useState } from 'react';
 //import Img
 import mobileApp1Img from '../assets/mobile-app-1.png';
 import mobileApp2Img from '../assets/mobile-app-2.png';
+// import mobileApp3Img from '../assets/mobile-app-3.png';
+import web1Img from '../assets/web-1.png';
 
 type ProjectType = 'mobile' | 'web';
 
@@ -35,6 +37,39 @@ export function Projects() {
       githubUrl:'https://github.com/febrinurdiansah/LaporSemanuApp',
       liveLink: '',
       isLive: false,
+    },
+    {
+      id: 3,
+      title: 'Habit Tracker App (Process)',
+      description: 'A comprehensive habit-tracking mobile application designed to help users build and maintain healthy daily routines with a customizable UI.',
+      tags: ['Flutter', 'Dart'],
+      type: 'mobile' as ProjectType,
+      // image: mobileApp3Img, 
+      githubUrl: 'https://github.com/febrinurdiansah/habit-tracker-app.git',
+      liveLink: '',
+      isLive: false,
+    },
+    {
+      id: 4,
+      title: 'Cosmic Observation',
+      description: 'An interactive web-based platform for astronomical data visualization and space exploration monitoring.',
+      tags: ['PHP', 'JavaScript', 'Web API'],
+      type: 'web' as ProjectType,
+      image: web1Img,
+      githubUrl: 'https://github.com/febrinurdiansah/Cosmic-Observation',
+      liveLink: 'https://cosmic-observation.wasmer.app/',
+      isLive: true,
+    },
+    {
+      id: 5,
+      title: 'Node.js REST API',
+      description: 'A robust and scalable backend service providing structured data endpoints, built with Node.js and Express for high-performance applications.',
+      tags: ['Node.js', 'Express', 'JavaScript'],
+      type: 'web' as ProjectType,
+      // image: web2Img,
+      githubUrl: 'https://github.com/febrinurdiansah/node-api',
+      liveLink: 'https://node-api-mu-ochre.vercel.app/',
+      isLive: true,
     },
   ];
 
@@ -69,7 +104,7 @@ export function Projects() {
           </h2>
 
           <p className="text-sm md:text-base text-neutral-400 max-w-3xl mb-12">
-            Showcase of mobile apps I've built. Web projects coming soon!
+            Explore my collection of mobile and web development projects, ranging from interactive user interfaces to robust backend services.
           </p>
 
           {/* Filter Tabs with Pixelated Style */}
@@ -77,12 +112,11 @@ export function Projects() {
             {[
               { value: 'all', label: 'All' },
               { value: 'mobile', label: 'Mobile' },
-              { value: 'web', label: 'Web [Soon]' },
+              { value: 'web', label: 'Web' },
             ].map((tab) => (
               <button
                 key={tab.value}
                 onClick={() => setFilter(tab.value as ProjectType | 'all')}
-                disabled={tab.value === 'web'}
                 className={`px-6 py-3 border-2 transition-all relative pixel-font text-xs ${
                   filter === tab.value
                     ? 'border-neutral-50 bg-neutral-50 text-neutral-950'
@@ -129,12 +163,26 @@ export function Projects() {
                   <div className="absolute -bottom-2 -right-2 w-2 h-2 bg-neutral-900 z-10"></div>
 
                   {/* Project Image */}
-                  <div className="relative aspect-video overflow-hidden border-b-4 border-neutral-800">
-                    <ImageWithFallback
-                      src={project.image}
-                      alt={project.title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                    />
+                  <div className="relative aspect-video overflow-hidden border-b-4 border-neutral-800 flex items-center justify-center bg-neutral-850">
+
+                      {project.image ? (
+                        <ImageWithFallback
+                          src={project.image}
+                          alt={project.title}
+                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                        />
+                      ) : (
+                        <div className="flex flex-col items-center justify-center text-neutral-500 gap-3">
+                          {project.type === 'mobile' ? (
+                            <Smartphone className="w-14 h-14 opacity-60" />
+                          ) : (
+                            <ExternalLink className="w-14 h-14 opacity-60" />
+                          )}
+                          <span className="pixel-font text-xs tracking-widest opacity-70">
+                            NO PREVIEW
+                          </span>
+                        </div>
+                      )}
                     
                     {/* Pixel overlay */}
                     <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/20 to-transparent opacity-60"></div>
