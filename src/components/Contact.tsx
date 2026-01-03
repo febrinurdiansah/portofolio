@@ -1,6 +1,14 @@
 import { motion } from 'motion/react';
-import { Mail, MapPin, Phone, ExternalLink, Sparkles, Clock, Calendar } from 'lucide-react';
-import { Button } from './ui/button';
+import {
+  Mail,
+  MapPin,
+  Phone,
+  ExternalLink,
+  Sparkles,
+  Clock,
+  Calendar,
+  Send
+} from 'lucide-react';
 
 export function Contact() {
   const contactInfo = [
@@ -14,7 +22,7 @@ export function Contact() {
     {
       icon: Phone,
       label: 'WhatsApp',
-      value: '+62 895 537 0855 594',
+      value: '+62 895 370 855 594',
       link: 'https://wa.me/62895370855594',
       description: 'Contact me on WhatsApp',
     },
@@ -23,221 +31,157 @@ export function Contact() {
       label: 'Location',
       value: 'Yogyakarta, Indonesia',
       link: null,
-      description: 'Available for remote and hybrid opportunities',
+      description: 'Available for remote/hybrid roles',
     },
   ];
 
   const socialLinks = [
-    {
-      name: 'LinkedIn',
-      url: 'https://www.linkedin.com/in/febrinrdsh/',
-      icon: null,
-      color: 'hover:bg-blue-500/10 hover:border-blue-500/30 hover:text-blue-400',
-    },
-    {
-      name: 'GitHub',
-      url: 'https://github.com/febrinurdiansah',
-      icon: null,
-      color: 'hover:bg-gray-500/10 hover:border-gray-500/30 hover:text-gray-300',
-    },
-    {
-      name: 'Instagram',
-      url: 'https://www.instagram.com/febrinrd_/',
-      icon: null,
-      color: 'hover:bg-pink-500/10 hover:border-pink-500/30 hover:text-pink-400',
-    },
+    { name: 'LinkedIn', url: 'https://www.linkedin.com/in/febrinrdsh/', icon: null },
+    { name: 'GitHub', url: 'https://github.com/febrinurdiansah', icon: null },
+    { name: 'Instagram', url: 'https://www.instagram.com/febrinrd_/', icon: null },
   ];
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.1 }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: { y: 0, opacity: 1 }
+  };
+
   return (
-    <section className="min-h-screen flex items-center justify-center px-6 pt-20 py-20" id="contact">
+    <section id="contact" className="min-h-screen flex justify-center px-4 md:px-6 py-40 bg-neutral-950"> 
       <div className="max-w-6xl w-full">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+        <motion.div 
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
         >
-          {/* Header Section */}
-          <div className="flex items-center gap-3 mb-4">
-            <div className="flex gap-1">
-              <div className="w-2 h-2 bg-neutral-500 animate-pulse"></div>
-              <div className="w-2 h-2 bg-neutral-600 animate-pulse" style={{ animationDelay: '0.2s' }}></div>
-              <div className="w-2 h-2 bg-neutral-700 animate-pulse" style={{ animationDelay: '0.4s' }}></div>
-            </div>
-            <div className="text-neutral-400 tracking-widest uppercase pixel-font text-xs">
-              Connect With Me
-            </div>
-          </div>
-          
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-6">
-            <div>
-              <h2 className="text-3xl md:text-5xl mb-4 relative inline-block pixel-title">
-                Let's Collaborate
-                <div className="absolute -bottom-2 -right-2 w-3 h-3 bg-neutral-700"></div>
+          {/* HEADER */}
+          <motion.div variants={itemVariants} className="mb-24"> 
+            <div className="pt-8"> 
+              <div className="flex items-center gap-3 mb-4">
+                <div className="flex gap-1">
+                  <div className="w-2 h-2 bg-neutral-500 animate-pulse"></div>
+                  <div className="w-2 h-2 bg-neutral-600 animate-pulse" style={{ animationDelay: '0.2s' }}></div>
+                </div>
+                <p className="pixel-font text-[10px] md:text-xs tracking-[0.2em] text-neutral-500 uppercase">
+                  Ready to Level Up?
+                </p>
+              </div>
+
+              <h2 className="pixel-title text-3xl md:text-5xl mb-4 text-neutral-50 leading-tight"> 
+                Let&apos;s Collaborate
               </h2>
-              <p className="text-xl text-neutral-400 max-w-3xl">
-                Ready to bring your ideas to life? Reach out through any of these channels.
+              <div className="h-1 w-24 bg-neutral-800 mb-8"></div>
+              
+              <p className="text-neutral-400 max-w-2xl text-sm md:text-base leading-relaxed mt-6"> 
+                Have a project in mind or just want to say hi? I&apos;m always open to discussing new opportunities and creative ideas.
               </p>
             </div>
-            
-            <div className="flex items-center gap-2 px-4 py-2 bg-neutral-900 border border-neutral-800 rounded">
-              <Sparkles className="w-4 h-4 text-neutral-400" />
-              <span className="text-sm text-neutral-300">Available for projects</span>
-            </div>
-          </div>
+          </motion.div>
 
-          {/* Contact Cards Grid */}
-          <div className="grid md:grid-cols-3 gap-6 mb-12">
-            {contactInfo.map((info, index) => (
+          {/* CONTACT CARDS */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16"> 
+            {contactInfo.map((info) => (
               <motion.div
                 key={info.label}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 * index }}
-                className="group relative"
+                variants={itemVariants}
+                whileHover={{ y: -5 }}
+                className="group relative bg-neutral-900/50 border border-neutral-800 p-6 transition-all hover:bg-neutral-900 hover:border-neutral-600"
               >
-                <div className="relative h-full p-6 bg-neutral-900 border border-neutral-800 hover:border-neutral-700 transition-all duration-300">
-                  
-                  <div className="absolute top-0 left-0 w-2 h-2 bg-neutral-700"></div>
-                  <div className="absolute top-0 right-0 w-2 h-2 bg-neutral-700"></div>
-                  <div className="absolute bottom-0 left-0 w-2 h-2 bg-neutral-700"></div>
-                  <div className="absolute bottom-0 right-0 w-2 h-2 bg-neutral-700"></div>
-                  
-                  {/* Hover effect pixel */}
-                  <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-neutral-600 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                  
-                  <div className="flex items-start gap-4">
-                    <div className="p-3 bg-neutral-950 border border-neutral-800">
-                      <info.icon className="w-5 h-5 text-neutral-300" />
-                    </div>
-                    <div className="flex-1">
-                      <div className="text-sm text-neutral-500 mb-1">{info.label}</div>
-                      {info.link ? (
-                        <a
-                          href={info.link}
-                          className="flex items-center gap-2 text-neutral-200 hover:text-neutral-50 transition-colors group/link"
-                          target={info.link.startsWith('http') ? '_blank' : '_self'}
-                          rel="noopener noreferrer"
-                        >
-                          <span className="text-lg font-medium">{info.value}</span>
-                          <ExternalLink className="w-4 h-4 opacity-0 group-hover/link:opacity-100 transition-opacity" />
-                        </a>
-                      ) : (
-                        <div className="text-lg text-neutral-200 font-medium">{info.value}</div>
-                      )}
-                      <p className="text-sm text-neutral-500 mt-2">{info.description}</p>
-                    </div>
+                <div className="absolute top-0 left-0 w-2 h-2 bg-neutral-700"></div>
+                <div className="absolute bottom-0 right-0 w-2 h-2 bg-neutral-700"></div>
+                
+                <div className="flex flex-col gap-4">
+                  <div className="w-12 h-12 bg-neutral-950 border border-neutral-800 flex items-center justify-center group-hover:border-neutral-500 transition-colors">
+                    <info.icon className="w-6 h-6 text-neutral-400 group-hover:text-neutral-50" />
+                  </div>
+                  <div>
+                    <p className="text-xs pixel-font text-neutral-500 mb-1">{info.label}</p>
+                    {info.link ? (
+                      <a href={info.link} target="_blank" rel="noopener noreferrer" 
+                         className="text-neutral-100 font-medium break-all flex items-center gap-2 hover:text-neutral-400 transition-colors">
+                        {info.value}
+                        <ExternalLink className="w-3 h-3 flex-shrink-0" />
+                      </a>
+                    ) : (
+                      <p className="text-neutral-100 font-medium">{info.value}</p>
+                    )}
+                    <p className="text-xs text-neutral-500 mt-3 italic">{info.description}</p>
                   </div>
                 </div>
               </motion.div>
             ))}
           </div>
 
-          {/* Main Content Area*/}
-          <div className="grid lg:grid-cols-2 gap-8">
-            {/* Left Side - Direct Contact */}
+          {/* BOTTOM AREA */}
+          <div className="grid lg:grid-cols-5 gap-8 mb-20"> 
+            {/* SOCIAL */}
+            <motion.div variants={itemVariants} className="lg:col-span-3 bg-neutral-900/30 border border-neutral-800 p-8 relative">
+              <div className="absolute top-0 right-0 w-3 h-3 bg-neutral-800"></div>
+              
+              <h3 className="text-xl pixel-title mb-8 flex items-center gap-3">
+                <Sparkles className="w-5 h-5 text-yellow-500/50" />
+                Digital Footprint
+              </h3>
 
-            {/* Right Side */}
-            <div className="flex flex-col gap-8">
-              {/* Social Panel*/}
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.4 }}
-                className="relative p-6 bg-neutral-900 border border-neutral-800 group flex-1"
-              >
-                
-                <div className="absolute top-0 left-0 w-2 h-2 bg-neutral-700"></div>
-                <div className="absolute top-0 right-0 w-2 h-2 bg-neutral-700"></div>
-                <div className="absolute bottom-0 left-0 w-2 h-2 bg-neutral-700"></div>
-                <div className="absolute bottom-0 right-0 w-2 h-2 bg-neutral-700"></div>
-                
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="p-2 bg-neutral-800 border border-neutral-700 rounded">
-                    <span className="text-lg">🔗</span>
-                  </div>
-                  <h4 className="text-xl">Connect on Social</h4>
-                </div>
-                
-                <div className="grid grid-cols-3 gap-4">
-                  {socialLinks.map((social) => (
-                    <a
-                      key={social.name}
-                      href={social.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={`p-4 border border-neutral-800 rounded-lg text-center transition-all duration-300 flex flex-col items-center gap-2 ${social.color} group/social`}
-                    >
-                      <div className="text-2xl mb-1">{social.icon}</div>
-                      <div className="font-medium text-sm">{social.name}</div>
-                      <div className="text-xs text-neutral-500 group-hover/social:text-current transition-colors">
-                        Visit →
-                      </div>
-                    </a>
-                  ))}
-                </div>
-              </motion.div>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                {socialLinks.map((s) => (
+                  <a
+                    key={s.name}
+                    href={s.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex flex-col items-center justify-center gap-3 border border-neutral-800 p-6 hover:bg-neutral-800 hover:border-neutral-600 transition-all group"
+                  >
+                    <span className="text-2xl group-hover:scale-125 transition-transform">{s.icon}</span>
+                    <span className="pixel-font text-[10px] text-neutral-400 uppercase group-hover:text-neutral-50">{s.name}</span>
+                  </a>
+                ))}
+              </div>
+            </motion.div>
 
-              {/* Working Hours Panel*/}
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.5 }}
-                className="relative p-6 bg-gradient-to-br from-neutral-900 to-neutral-950 border border-neutral-800 group flex-1"
-              >
-                
-                <div className="absolute top-0 left-0 w-2 h-2 bg-neutral-700"></div>
-                <div className="absolute top-0 right-0 w-2 h-2 bg-neutral-700"></div>
-                <div className="absolute bottom-0 left-0 w-2 h-2 bg-neutral-700"></div>
-                <div className="absolute bottom-0 right-0 w-2 h-2 bg-neutral-700"></div>
-                
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="p-2 bg-neutral-800 border border-neutral-700 rounded">
-                    <Calendar className="w-4 h-4 text-neutral-300" />
+            {/* WORKING HOURS */}
+            <motion.div variants={itemVariants} className="lg:col-span-2 bg-neutral-900/30 border border-neutral-800 p-8 relative">
+              <div className="absolute bottom-0 left-0 w-3 h-3 bg-neutral-800"></div>
+              
+              <h3 className="text-xl pixel-title mb-8 flex items-center gap-3">
+                <Clock className="w-5 h-5 text-blue-500/50" />
+                Availability
+              </h3>
+
+              <div className="space-y-6">
+                <div className="flex justify-between items-center border-b border-neutral-800 pb-4">
+                  <div className="flex items-center gap-3">
+                    <Calendar className="w-4 h-4 text-neutral-500" />
+                    <span className="text-neutral-400 text-sm">Mon — Fri</span>
                   </div>
-                  <h4 className="text-xl">Working Hours</h4>
+                  <span className="text-neutral-100 text-sm font-medium bg-neutral-800 px-3 py-1">09:00 - 18:00</span>
                 </div>
-                
-                <div className="space-y-4">
-                  <div className="flex justify-between items-center py-3 px-4 bg-neutral-900/50 border border-neutral-800 rounded">
-                    <div className="flex items-center gap-3">
-                      <div className="w-2 h-2 bg-neutral-500 rounded-full"></div>
-                      <span className="text-neutral-300">Mon - Fri</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Clock className="w-3 h-3 text-neutral-400" />
-                      <span className="text-neutral-200 font-medium">9:00 - 18:00</span>
-                    </div>
-                  </div>
-                  
-                  <div className="flex justify-between items-center py-3 px-4 bg-neutral-900/50 border border-neutral-800 rounded">
-                    <div className="flex items-center gap-3">
-                      <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
-                      <span className="text-neutral-300">Weekend</span>
-                    </div>
-                    <span className="text-neutral-200 font-medium">Flexible</span>
-                  </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-neutral-400 text-sm italic">Status</span>
+                  <span className="text-green-500 text-xs pixel-font animate-pulse flex items-center gap-2">
+                    <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                    OPEN FOR WORK
+                  </span>
                 </div>
-                
-                <div className="mt-6 p-3 bg-neutral-950/80 border border-neutral-800 rounded text-center">
-                  <p className="text-sm text-neutral-300">
-                    <span className="text-green-400">✓</span> Open for freelance & full-time opportunities
-                  </p>
-                </div>
-              </motion.div>
-            </div>
+              </div>
+            </motion.div>
           </div>
 
-          {/* Footer Note */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.8 }}
-            className="mt-16 pt-8 border-t border-neutral-800 text-center"
-          >
-            <p className="text-neutral-500">
-              Looking forward to hearing from you. Let's build something great together!
+          {/* FOOTER */}
+          <div className="mt-32 pt-16 pb-16 border-t border-neutral-900">
+            <p className="text-center text-neutral-500 text-sm md:text-base px-4">
+              Looking forward to hearing from you. Let&apos;s build something great together!
             </p>
-          </motion.div>
+          </div>
         </motion.div>
       </div>
     </section>

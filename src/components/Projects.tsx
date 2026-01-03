@@ -1,5 +1,5 @@
 import { motion } from 'motion/react';
-import { ExternalLink, Github, Smartphone } from 'lucide-react';
+import { ExternalLink, Github, Smartphone, Globe } from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import { Button } from './ui/button';
 import { useState } from 'react';
@@ -188,14 +188,25 @@ export function Projects() {
                     <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/20 to-transparent opacity-60"></div>
                     
                     {/* Type Badge - Pixelated */}
-                    <div className="absolute top-4 right-4 bg-neutral-900/90 border-2 border-neutral-700 px-3 py-2">
-                      <div className="flex items-center gap-2">
-                        <Smartphone className="w-4 h-4 text-neutral-400" />
-                        <span className="pixel-font text-xs text-neutral-300">Mobile</span>
+                      <div className="absolute top-4 right-4 bg-neutral-900/90 border-2 border-neutral-700 px-3 py-2 z-20">
+                        <div className="flex items-center gap-2">
+                          {/* Logika Ganti Ikon */}
+                          {project.type === 'mobile' ? (
+                            <Smartphone className="w-4 h-4 text-neutral-400" />
+                          ) : (
+                            <Globe className="w-4 h-4 text-neutral-400" />
+                          )}
+                          
+                          {/* Logika Ganti Teks */}
+                          <span className="pixel-font text-xs text-neutral-300 uppercase">
+                            {project.type === 'mobile' ? 'Mobile' : 'Web'}
+                          </span>
+                        </div>
+                        
+                        {/* Pixelated corners tetap dipertahankan */}
+                        <div className="absolute -top-1 -left-1 w-2 h-2 bg-neutral-600"></div>
+                        <div className="absolute -bottom-1 -right-1 w-2 h-2 bg-neutral-600"></div>
                       </div>
-                      <div className="absolute -top-1 -left-1 w-2 h-2 bg-neutral-600"></div>
-                      <div className="absolute -bottom-1 -right-1 w-2 h-2 bg-neutral-600"></div>
-                    </div>
 
                     {/* Pixel grid overlay effect */}
                     <div className="absolute inset-0 opacity-5 pointer-events-none">
